@@ -1,6 +1,6 @@
 # Network Scanner - Feature Additions and Implementation Guide
 
-This document outlines potential feature enhancements for the network scanner and provides step-by-step instructions for implementation.
+This document outlines potential feature enhancaments for the network scanner and provides step-by-step instructions for implementation.
 
 ---
 
@@ -36,20 +36,3 @@ This document outlines potential feature enhancements for the network scanner an
 1. Modify `scan_port()` to attempt retrieving the service name.
 2. Use Python’s `socket.getservbyport(port)` to check known services.
 3. Display the service name next to open ports.
-
-#### Example Code:
-```python
-def scan_port(ip, port):
-    try:
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.settimeout(1)
-        result = sock.connect_ex((ip, port))
-        if result == 0:
-            try:
-                service = socket.getservbyport(port)
-            except OSError:
-                service = "Unknown Service"
-            print(f"Port {port} is open on {ip} ({service})")
-        sock.close()
-    except socket.error:
-        pass
